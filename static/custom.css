@@ -282,4 +282,17 @@ button,
     direction: rtl;
     text-align: right;
   }
+  .tag-cloud .badge {
+    font-size: 1em;
+    font-weight: 500;
+    border-radius: 1.5em;
+    background: #f3f6fc !important;
+    color: #2675d7 !important;
+    border: 1px solid #e4eaf4;
+    margin: 4px;
+    padding: 0.5em 1.1em;
+    box-shadow: 0 1px 3px #e0e8f633;
+    cursor: default;
+    user-select: none;
+  }
 }

@@ -9,27 +9,25 @@
       content="mCVYgzrnMh1awJHN9ZSVbRFDhHHbMWLKz9zuwPD5AKE"
     />
     <!-- Bootstrap RTL -->
-
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"
       rel="stylesheet"
     />
-    <!-- גוגל פונטים -->
+    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Assistant:wght@700;900&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&display=swap"
-    />
-    <!-- CSS אישי -->
-    <link
-      rel="stylesheet"
       href="{{ url_for('static', filename='custom.css') }}"
     />
     <style>
-      /* ----- צבע פוקוס/דלג לתוכן ------ */
+      body {
+        background: #f8fcff;
+        font-family: "Assistant", Arial, sans-serif;
+      }
+      /* Skip link */
       .skip-link {
         position: absolute;
         left: -9999px;
@@ -53,10 +51,113 @@
         outline-offset: 2px;
         box-shadow: 0 0 0 2px #ffd60055;
       }
+      /* לוגו וניווט - קופסה מודרנית */
+      .main-header-box {
+        margin: 0 auto 18px auto;
+        padding: 0 0 16px 0;
+        max-width: 800px;
+        border-radius: 2.2em;
+        background: linear-gradient(90deg, #f8fcff 60%, #f1faf7 100%);
+        box-shadow: 0 4px 24px #e0f2fc77;
+        border: 1.5px solid #e3f2fd;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 12;
+      }
+      .main-header-logo {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 24px 0 0 0;
+        min-width: 220px;
+        background: none;
+        justify-content: center;
+      }
+      .main-header-logo .icon {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #36db9e 65%, #2ca9bc 100%);
+        width: 52px;
+        height: 52px;
+        border-radius: 1.5em 2.5em 2.5em 1.5em/2em 2.5em 1.5em 1.5em;
+        box-shadow: 0 6px 22px #2ca9bc38;
+        position: relative;
+      }
+      .main-header-logo .txt-main {
+        font-weight: 900;
+        font-size: 2.1rem;
+        color: #1662be;
+        letter-spacing: 0.02em;
+        margin-bottom: 2px;
+        font-family: "Assistant", Arial, sans-serif;
+      }
+      .main-header-logo .txt-sub {
+        color: #36db9e;
+        font-size: 1.01rem;
+        font-weight: 700;
+        margin-right: 2px;
+        letter-spacing: 0.01em;
+        font-family: "Assistant", Arial, sans-serif;
+      }
+      .main-nav-bar {
+        margin: 22px auto 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        font-family: "Assistant", Arial, sans-serif;
+        font-size: 1.1em;
+        min-width: 210px;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0 0 0 0;
+        background: none;
+      }
+      .main-nav-bar a {
+        padding: 10px 26px 10px 26px;
+        margin: 0 2px;
+        color: #2675d7;
+        background: #f5fafe;
+        font-weight: 700;
+        border-radius: 1.2em;
+        transition: background 0.2s, color 0.2s;
+        text-decoration: none;
+        outline: none;
+        display: inline-block;
+        position: relative;
+      }
+      .main-nav-bar a.active,
+      .main-nav-bar a[aria-current="page"] {
+        color: #fff;
+        background: linear-gradient(92deg, #2ca9bc 70%, #2675d7 100%);
+        box-shadow: 0 3px 9px #2ca9bc33;
+      }
+      .main-nav-bar a:hover:not(.active):not([aria-current="page"]) {
+        background: linear-gradient(94deg, #f0fcf5 70%, #e3f1fa 100%);
+        color: #1662be;
+      }
+      @media (max-width: 600px) {
+        .main-header-box {
+          padding-bottom: 7px;
+        }
+        .main-header-logo {
+          flex-direction: column;
+          padding: 17px 0 0 0;
+        }
+        .main-nav-bar {
+          flex-direction: column;
+          gap: 4px;
+          padding: 0;
+        }
+      }
       /* קונטרסט גבוה */
       body.high-contrast,
       body.high-contrast .container,
-      body.high-contrast .floating-nav-wrapper,
+      body.high-contrast .main-header-box,
       body.high-contrast .disclaimer-btn {
         background: #000 !important;
         color: #fff !important;
@@ -68,129 +169,99 @@
         border-color: #ffd600 !important;
       }
     </style>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ url_for('static', filename='favicon.svg') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='favicon.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
   </head>
   <body>
     <!-- דלג לתוכן -->
     <a href="#main-content" class="skip-link" tabindex="0">דלג לתוכן הראשי</a>
-    <!-- ניווט דו שכבתי יצירתי -->
-    <div
-      class="floating-nav-wrapper position-relative"
-      role="navigation"
-      aria-label="ניווט ראשי"
-    >
-      <!-- שורה עליונה – לוגו + כותרת -->
-      <div class="floating-logo-row text-center py-2">
-        <span
-          class="floating-logo d-flex align-items-center"
-          style="vertical-align: middle; gap: 12px"
-        >
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 80 80"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            id="logo"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <rect
-              x="18"
-              y="15"
-              width="44"
-              height="50"
-              rx="10"
-              stroke="#2ca9bc"
-              stroke-width="3"
-              fill="#e8f3fd"
-            />
-            <rect x="24" y="22" width="32" height="18" rx="4" fill="#2675d7" />
-            <text
-              id="currency-symbol"
-              x="40"
-              y="31"
-              text-anchor="middle"
-              fill="#36db9e"
-              font-family="Fredoka, Arial, sans-serif"
-              font-weight="700"
-              font-size="22"
-              dominant-baseline="middle"
-              style="user-select: none"
-            >
-              ₪
-            </text>
-            <circle cx="26" cy="48" r="4" fill="#36db9e" />
-            <circle cx="40" cy="48" r="4" fill="#36db9e" />
-            <circle cx="54" cy="48" r="4" fill="#36db9e" />
-            <circle cx="26" cy="58" r="4" fill="#2ca9bc" />
-            <circle cx="40" cy="58" r="4" fill="#2ca9bc" />
-            <circle cx="54" cy="58" r="4" fill="#2ca9bc" />
-          </svg>
 
-          <div
-            style="
-              display: flex;
-              flex-direction: column;
-              line-height: 1.1;
-              text-align: right;
-              color: #2675d7;
-              user-select: none;
-              font-family: 'Fredoka', Arial, sans-serif;
-            "
-          >
-            <span style="font-weight: 800; font-size: 18px"
-              >המחשבון שלי, המחשבון שלך</span
-            >
-            <span style="font-weight: 600; font-size: 14px; color: #36db9e"
-              >הכל במקום אחד: חישובי הנחה, מע"מ, ריבית, תשלומים והמרות
-              מטבע</span
-            >
+    <!-- קופסת לוגו וניווט -->
+    <div class="main-header-box">
+      <!-- לוגו -->
+      <div class="main-header-logo">
+        <a
+          href="/"
+          style="
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            text-decoration: none;
+            cursor: pointer;
+          "
+        >
+          <div class="icon">
+            <svg width="38" height="38" viewBox="0 0 54 54">
+              <rect
+                x="5"
+                y="5"
+                width="44"
+                height="44"
+                rx="13"
+                fill="#fff"
+                stroke="#2ca9bc"
+                stroke-width="2"
+              />
+              <rect x="13" y="14" width="28" height="8" rx="3" fill="#2675d7" />
+              <circle cx="20" cy="36" r="3" fill="#36db9e" />
+              <circle cx="27" cy="39" r="3" fill="#36db9e" />
+              <circle cx="34" cy="36" r="3" fill="#36db9e" />
+              <circle cx="22" cy="27" r="1.7" fill="#2ca9bc" />
+              <circle cx="32" cy="27" r="1.7" fill="#2ca9bc" />
+            </svg>
           </div>
-        </span>
-        <script>
-          const symbols = ["₪", "$", "€", "£", "¥", "₣", "₹", "₽"];
-          let index = 0;
-          const symbolElement = document.getElementById("currency-symbol");
-          setInterval(() => {
-            index = (index + 1) % symbols.length;
-            symbolElement.textContent = symbols[index];
-          }, 1000);
-        </script>
+          <div>
+            <div class="txt-main">hakalkulator</div>
+            <div class="txt-sub">כל החישובים. בכל תחום. במקום אחד.</div>
+          </div>
+        </a>
       </div>
-      <!-- שורה שניה – ניווט קישורים -->
-      <nav
-        class="floating-nav-links d-flex justify-content-center align-items-center position-relative"
-        aria-label="קישורי מחשבונים"
-      >
+      <!-- ניווט -->
+      <nav class="main-nav-bar" aria-label="קישורי מחשבונים">
         {% set pages = [ ('/vat', 'מע״מ'), ('/interest', 'ריבית'), ('/payments',
         'תשלומים'), ('/currency', 'המרת מטבע'), ('/discount', 'הנחה') ] %} {%
         for url, label in pages %}
         <a
           href="{{ url }}"
-          class="floating-nav-link {% if url in request.path %}active{% endif %}"
-          data-label="{{ label }}"
+          class="{% if url in request.path %}active{% endif %}"
           aria-current="{% if url in request.path %}page{% endif %}"
           >{{ label }}</a
         >
         {% endfor %}
-        <!-- קו אנימציה -->
-        <div id="nav-underline" aria-hidden="true"></div>
       </nav>
     </div>
-
-    <!-- בלוק ממותג לכותרת ראשית -->
+    <!-- /סוף קופסה -->
 
     <!-- תוכן משתנה -->
     <main id="main-content" tabindex="-1" role="main">
       <div class="container">{% block content %} {% endblock %}</div>
     </main>
 
-    <!-- דיסקליימר בעיצוב מודרני -->
+    <!-- דיסקליימר -->
     <div style="display: flex; justify-content: center">
       <div
         class="disclaimer-btn mt-4 text-center"
         dir="rtl"
         aria-label="הערת שוליים"
+        style="
+          background: #f5fafe;
+          border-radius: 1em;
+          max-width: 580px;
+          box-shadow: 0 2px 12px #cde7ef2b;
+        "
       >
         <b>לתשומת לבך:</b> שערי המטבעות מתעדכנים לפי בנק ישראל.<br />
         ייתכן פערים בין נתוני האתר לשערי החליפין בפועל.<br />
@@ -253,7 +324,7 @@
         />
       </svg>
     </button>
-    <!-- תפריט נגישות מדוגם בסיסי -->
+    <!-- תפריט נגישות בסיסי -->
     <div
       id="accessibility-menu"
       style="
@@ -288,27 +359,8 @@
       </button>
     </div>
     <script>
+      // כפתור ותפריט נגישות
       document.addEventListener("DOMContentLoaded", function () {
-        const navLinks = document.querySelectorAll(".floating-nav-link");
-        const underline = document.getElementById("nav-underline");
-        function moveUnderline(el) {
-          if (!el) return;
-          const nav = el.parentNode;
-          const navRect = nav.getBoundingClientRect();
-          const elRect = el.getBoundingClientRect();
-          underline.style.right = navRect.right - elRect.right + "px";
-          underline.style.width = elRect.width + "px";
-        }
-        // highlight on load
-        let active = document.querySelector(".floating-nav-link.active");
-        moveUnderline(active);
-        // highlight on hover
-        navLinks.forEach((link) => {
-          link.addEventListener("mouseenter", (e) => moveUnderline(link));
-          link.addEventListener("mouseleave", (e) => moveUnderline(active));
-        });
-
-        // כפתור ותפריט נגישות
         const accessBtn = document.getElementById("accessibility-btn");
         const menu = document.getElementById("accessibility-menu");
         accessBtn.addEventListener("click", function () {
@@ -327,7 +379,6 @@
           if (e.key === "Escape") menu.style.display = "none";
         });
       });
-
       // פונקציות תפריט נגישות
       function toggleContrast() {
         document.body.classList.toggle("high-contrast");
@@ -344,83 +395,8 @@
         btn.setAttribute("aria-pressed", String(!pressed));
       }
     </script>
+    <footer class="text-center mt-5" style="font-size: 1em; color: #888">
+      <a href="/about">אודות</a> | <a href="/privacy">מדיניות פרטיות</a>
+    </footer>
   </body>
-  <div
-    style="
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 36px;
-      background: #fff;
-      box-shadow: 0 2px 18px #e8f3fdcc;
-      border-radius: 2.6em;
-      padding: 22px 36px 22px 14px;
-      min-width: 330px;
-      max-width: 550px;
-    "
-  >
-    <div
-      style="
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #36db9e 65%, #2ca9bc 100%);
-        width: 58px;
-        height: 58px;
-        border-radius: 1.5em 2.5em 2.5em 1.5em/2em 2.5em 1.5em 1.5em;
-        box-shadow: 0 6px 22px #2ca9bc38;
-        position: relative;
-      "
-    >
-      <svg width="44" height="44" viewBox="0 0 54 54">
-        <rect
-          x="5"
-          y="5"
-          width="44"
-          height="44"
-          rx="13"
-          fill="#fff"
-          stroke="#2ca9bc"
-          stroke-width="2"
-        />
-        <rect x="13" y="14" width="28" height="8" rx="3" fill="#2675d7" />
-        <circle cx="20" cy="36" r="3" fill="#36db9e" />
-        <circle cx="27" cy="39" r="3" fill="#36db9e" />
-        <circle cx="34" cy="36" r="3" fill="#36db9e" />
-        <circle cx="22" cy="27" r="1.7" fill="#2ca9bc" />
-        <circle cx="32" cy="27" r="1.7" fill="#2ca9bc" />
-      </svg>
-    </div>
-    <div>
-      <div
-        style="
-          font-family: 'Assistant', Arial, sans-serif;
-          font-weight: 900;
-          font-size: 2.2rem;
-          color: #1662be;
-          letter-spacing: 0.02em;
-          margin-bottom: 6px;
-        "
-      >
-        hakalkulator
-      </div>
-      <div
-        style="
-          font-family: 'Assistant', Arial, sans-serif;
-          color: #36db9e;
-          font-size: 1.03rem;
-          font-weight: 700;
-          margin-right: 2px;
-          letter-spacing: 0.01em;
-        "
-      >
-        כל החישובים. בכל תחום. במקום אחד.
-      </div>
-    </div>
-  </div>
-
-  <footer class="text-center mt-5" style="font-size: 1em; color: #888">
-    <a href="/about">אודות</a> | <a href="/privacy">מדיניות פרטיות</a>
-  </footer>
 </html>
