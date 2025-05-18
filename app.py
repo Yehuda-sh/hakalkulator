@@ -203,6 +203,13 @@ def discount():
         except Exception:
             error = "אנא מלא ערכים תקינים בלבד"
     return render_template('discount.html', result=result, error=error)
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
 
 @app.route('/accessibility-statement')
 def accessibility_statement():
