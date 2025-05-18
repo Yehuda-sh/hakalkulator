@@ -2,7 +2,9 @@
 <html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}מחשבון כסף חכם{% endblock %}</title>
+    <title>
+      {% block title %}hakalkulator – כל החישובים במקום אחד{% endblock %}
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="google-site-verification"
@@ -22,8 +24,26 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='custom.css') }}"
     />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ url_for('static', filename='favicon.svg') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='favicon.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
     <style>
+      html,
       body {
+        max-width: 100vw;
+        overflow-x: hidden;
         background: #f8fcff;
         font-family: "Assistant", Arial, sans-serif;
       }
@@ -65,15 +85,16 @@
         align-items: center;
         position: relative;
         z-index: 12;
+        width: 100%;
       }
       .main-header-logo {
         display: flex;
         align-items: center;
-        gap: 18px;
-        padding: 24px 0 0 0;
-        min-width: 220px;
+        gap: 14px;
+        padding: 22px 0 0 0;
         background: none;
         justify-content: center;
+        width: 100%;
       }
       .main-header-logo .icon {
         flex-shrink: 0;
@@ -104,21 +125,20 @@
         font-family: "Assistant", Arial, sans-serif;
       }
       .main-nav-bar {
-        margin: 22px auto 0 auto;
+        margin: 14px auto 0 auto;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         justify-content: center;
         font-family: "Assistant", Arial, sans-serif;
         font-size: 1.1em;
-        min-width: 210px;
         flex-wrap: wrap;
         width: 100%;
-        padding: 0 0 0 0;
+        padding: 0;
         background: none;
       }
       .main-nav-bar a {
-        padding: 10px 26px 10px 26px;
+        padding: 10px 11px;
         margin: 0 2px;
         color: #2675d7;
         background: #f5fafe;
@@ -129,6 +149,35 @@
         outline: none;
         display: inline-block;
         position: relative;
+        font-size: 1em;
+      }
+      @media (max-width: 600px) {
+        .main-header-box {
+          padding-bottom: 7px;
+          max-width: 100vw;
+          border-radius: 0 0 2.2em 2.2em;
+        }
+        .main-header-logo {
+          flex-direction: column;
+          padding: 10px 0 0 0;
+          gap: 6px;
+          width: 100%;
+        }
+        .main-nav-bar {
+          flex-direction: column;
+          gap: 2px;
+          padding: 0;
+          width: 100vw;
+          box-sizing: border-box;
+        }
+        .container {
+          max-width: 99vw !important;
+          padding-left: 7px !important;
+          padding-right: 7px !important;
+        }
+        .main-header-logo .txt-main {
+          font-size: 1.35rem;
+        }
       }
       .main-nav-bar a.active,
       .main-nav-bar a[aria-current="page"] {
@@ -139,20 +188,6 @@
       .main-nav-bar a:hover:not(.active):not([aria-current="page"]) {
         background: linear-gradient(94deg, #f0fcf5 70%, #e3f1fa 100%);
         color: #1662be;
-      }
-      @media (max-width: 600px) {
-        .main-header-box {
-          padding-bottom: 7px;
-        }
-        .main-header-logo {
-          flex-direction: column;
-          padding: 17px 0 0 0;
-        }
-        .main-nav-bar {
-          flex-direction: column;
-          gap: 4px;
-          padding: 0;
-        }
       }
       /* קונטרסט גבוה */
       body.high-contrast,
@@ -169,26 +204,10 @@
         border-color: #ffd600 !important;
       }
     </style>
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="{{ url_for('static', filename='favicon.svg') }}"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      href="{{ url_for('static', filename='favicon.png') }}"
-    />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='favicon.ico') }}"
-    />
   </head>
   <body>
     <!-- דלג לתוכן -->
     <a href="#main-content" class="skip-link" tabindex="0">דלג לתוכן הראשי</a>
-
     <!-- קופסת לוגו וניווט -->
     <div class="main-header-box">
       <!-- לוגו -->
@@ -198,7 +217,7 @@
           style="
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 14px;
             text-decoration: none;
             cursor: pointer;
           "
