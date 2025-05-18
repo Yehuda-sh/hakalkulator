@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>תוצאה</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f8fcff;
+        color: #222;
+        direction: rtl;
+        text-align: right;
+        margin: 0;
+        padding: 0;
+      }
+      .result-container {
+        max-width: 420px;
+        margin: 60px auto;
+        background: #fff;
+        border-radius: 1.6rem;
+        box-shadow: 0 2px 12px #cde7ef2b;
+        padding: 2em 1.2em;
+      }
+      .result-value {
+        font-size: 1.3em;
+        color: #1662be;
+        font-weight: bold;
+      }
+      .back-link {
+        display: inline-block;
+        margin-top: 1.6em;
+        color: #2675d7;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+      .back-link:focus {
+        outline: 2px solid #ffd600;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="result-container" role="main" aria-label="תוצאת החישוב">
+      <h2 tabindex="0" aria-label="כותרת: התוצאה שלך">התוצאה שלך:</h2>
+      <p aria-label="סכום התחלתי">הסכום ההתחלתי: <b>{{ amount }}</b></p>
+      <p aria-label="החישוב שבוצע">
+        החישוב שבוצע: {% if calc_type == 'add_vat' %} הוספת מע"מ (17%) {% elif
+        calc_type == 'remove_vat' %} הסרת מע"מ (17%) {% elif calc_type ==
+        'simple_interest' %} ריבית פשוטה (5%) {% endif %}
+      </p>
+      <p class="result-value" role="status" aria-live="polite" tabindex="0">
+        הסכום לאחר החישוב: {{ result }}
+      </p>
+      <a href="/" class="back-link" aria-label="חזור לעמוד הראשי">חזור</a>
+    </main>
+  </body>
+</html>

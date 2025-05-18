@@ -1,0 +1,194 @@
+{% extends "base.html" %} {% block title %}מחשבון ריבית{% endblock %} {% block
+content %}
+
+<h2
+  class="mb-4 text-center"
+  dir="rtl"
+  tabindex="0"
+  aria-label="כותרת: מחשבון ריבית"
+>
+  מחשבון ריבית
+</h2>
+
+<div
+  class="alert alert-info mb-4 text-center"
+  dir="rtl"
+  style="max-width: 430px; margin: 0 auto"
+  role="status"
+  aria-live="polite"
+>
+  הזן סכום התחלתי, שיעור ריבית ומספר שנים.<br />
+  תוכל לבחור חישוב ריבית פשוטה או ריבית דריבית.<br />
+  גלה בקלות כמה יצבור הכסף שלך!
+</div>
+
+<form
+  method="post"
+  class="mx-auto text-center"
+  dir="rtl"
+  style="
+    max-width: 350px;
+    background: #f8fcff;
+    border-radius: 1.7rem;
+    box-shadow: 0 2px 12px #cde7ef2b;
+    padding: 1.7em 1em;
+  "
+  aria-label="טופס מחשבון ריבית"
+  autocomplete="off"
+>
+  <fieldset aria-label="הזנת נתוני חישוב ריבית">
+    <legend class="visually-hidden">הזן נתוני ריבית</legend>
+    <div class="mb-3">
+      <label for="amount" class="form-label fw-bold text-center w-100">
+        סכום התחלתי (₪)
+      </label>
+      <input
+        type="number"
+        step="0.01"
+        class="form-control text-center"
+        id="amount"
+        name="amount"
+        required
+        aria-required="true"
+        aria-label="הזן סכום התחלתי"
+        min="0.01"
+        placeholder="לדוג' 1000"
+        value="{{ request.form.amount or '' }}"
+        inputmode="decimal"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="rate" class="form-label fw-bold text-center w-100">
+        שיעור ריבית שנתית (%)
+      </label>
+      <input
+        type="number"
+        step="0.01"
+        class="form-control text-center"
+        id="rate"
+        name="rate"
+        required
+        aria-required="true"
+        aria-label="הזן שיעור ריבית"
+        min="0"
+        placeholder="לדוג' 4.5"
+        value="{{ request.form.rate or '' }}"
+        inputmode="decimal"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="years" class="form-label fw-bold text-center w-100">
+        מספר שנים
+      </label>
+      <input
+        type="number"
+        class="form-control text-center"
+        id="years"
+        name="years"
+        required
+        aria-required="true"
+        aria-label="הזן מספר שנים"
+        min="1"
+        placeholder="לדוג' 5"
+        value="{{ request.form.years or '' }}"
+        inputmode="numeric"
+      />
+    </div>
+    <div class="mb-3">
+      <fieldset class="w-100" aria-label="סוג הריבית">
+        <legend
+          class="form-label fw-bold d-block text-center mb-2 w-100 visually-hidden"
+          tabindex="0"
+        >
+          סוג הריבית
+        </legend>
+        <div
+          class="btn-group w-100 justify-content-center"
+          role="radiogroup"
+          aria-label="סוג ריבית"
+          dir="rtl"
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            name="compound"
+            id="compound"
+            value="1"
+            autocomplete="off"
+            {%
+            if
+            request.form.compound
+            %}checked{%
+            endif
+            %}
+            aria-labelledby="label-compound"
+            required
+            aria-required="true"
+          />
+          <label
+            class="btn btn-outline-primary"
+            id="label-compound"
+            for="compound"
+          >
+            ריבית דריבית
+          </label>
+          <input
+            type="radio"
+            class="btn-check"
+            name="compound"
+            id="simple"
+            value=""
+            autocomplete="off"
+            {%
+            if
+            not
+            request.form.compound
+            %}checked{%
+            endif
+            %}
+            aria-labelledby="label-simple"
+            required
+            aria-required="true"
+          />
+          <label class="btn btn-outline-primary" id="label-simple" for="simple">
+            ריבית פשוטה
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </fieldset>
+  <button
+    type="submit"
+    class="btn btn-success w-100 mt-3"
+    aria-label="חשב ריבית"
+  >
+    חשב
+  </button>
+  {% if error %}
+  <div
+    class="alert alert-danger mt-3 text-center"
+    dir="rtl"
+    role="alert"
+    aria-live="assertive"
+    tabindex="0"
+  >
+    {{ error }}
+  </div>
+  {% endif %}
+</form>
+
+{% if result %}
+<div
+  class="result-card text-center mt-4"
+  dir="rtl"
+  style="max-width: 350px; margin: 0 auto"
+  role="status"
+  aria-live="polite"
+  tabindex="0"
+>
+  <div>{{ result.label }}</div>
+  <div class="result-value" style="font-size: 1.25em">
+    {{ "{:,.2f}".format(result.value) }} ₪
+  </div>
+</div>
+{% endif %} {% endblock %}

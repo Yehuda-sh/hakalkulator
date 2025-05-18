@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <title>לוגו עם טקסט מעוצב</title>
+    <style>
+      body {
+        font-family: "Fredoka", Arial, sans-serif;
+        background: #f0f8ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 16px; /* רווח בין הלוגו לטקסט */
+      }
+      .logo-text {
+        color: #1662be;
+        font-weight: 800;
+        font-size: 28px;
+        user-select: none;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        font-family: "Fredoka", Arial, sans-serif;
+      }
+      .logo-subtext {
+        color: #26b480;
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 4px;
+        text-align: right;
+        user-select: none;
+        line-height: 1.2;
+        font-family: "Fredoka", Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo-container">
+      <!-- כאן ה-SVG של הלוגו -->
+      <svg
+        width="80"
+        height="80"
+        viewBox="0 0 80 80"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        id="logo"
+      >
+        <rect
+          x="18"
+          y="15"
+          width="44"
+          height="50"
+          rx="10"
+          stroke="#2ca9bc"
+          stroke-width="3"
+          fill="#e8f3fd"
+        />
+        <rect x="24" y="22" width="32" height="18" rx="4" fill="#2675d7" />
+        <text
+          id="currency-symbol"
+          x="40"
+          y="31"
+          text-anchor="middle"
+          fill="#36db9e"
+          font-family="Fredoka, Arial, sans-serif"
+          font-weight="700"
+          font-size="22"
+          dominant-baseline="middle"
+          style="user-select: none"
+        >
+          ₪
+        </text>
+        <circle cx="26" cy="48" r="4" fill="#36db9e" />
+        <circle cx="40" cy="48" r="4" fill="#36db9e" />
+        <circle cx="54" cy="48" r="4" fill="#36db9e" />
+        <circle cx="26" cy="58" r="4" fill="#2ca9bc" />
+        <circle cx="40" cy="58" r="4" fill="#2ca9bc" />
+        <circle cx="54" cy="58" r="4" fill="#2ca9bc" />
+      </svg>
+
+      <!-- טקסט לצד הלוגו -->
+      <div>
+        <div class="logo-text">המחשבון שלי, המחשבון שלך</div>
+        <div class="logo-subtext">
+          הכל במקום אחד: חישובי הנחה, מע"מ, ריבית, תשלומים והמרות מטבע
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const symbols = ["₪", "$", "€", "£", "¥", "₣", "₹", "₽"];
+      let index = 0;
+      const symbolElement = document.getElementById("currency-symbol");
+      setInterval(() => {
+        index = (index + 1) % symbols.length;
+        symbolElement.textContent = symbols[index];
+      }, 1000);
+    </script>
+  </body>
+</html>

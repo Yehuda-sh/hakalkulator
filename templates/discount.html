@@ -1,0 +1,144 @@
+{% extends "base.html" %} {% block title %}מחשבון הנחות{% endblock %} {% block
+content %}
+
+<h2
+  class="mb-4 text-center"
+  dir="rtl"
+  tabindex="0"
+  aria-label="כותרת: מחשבון הנחות"
+>
+  מחשבון הנחות
+</h2>
+
+<div
+  class="alert alert-info mb-4 text-center"
+  dir="rtl"
+  style="max-width: 430px; margin: 0 auto"
+  role="status"
+  aria-live="polite"
+>
+  הזן את המחיר המקורי של המוצר ואת אחוזי ההנחה. אפשר גם להוסיף שתי הנחות (למשל
+  הנחת קופה והנחת מועדון).
+  <br />תקבל מחיר סופי, סכום החיסכון הכולל, ואחוז החיסכון האפקטיבי!
+</div>
+
+<form
+  method="post"
+  class="mx-auto text-center"
+  dir="rtl"
+  style="
+    max-width: 340px;
+    background: #f8fcff;
+    border-radius: 1.6rem;
+    box-shadow: 0 2px 12px #cde7ef2b;
+    padding: 1.6em 1em;
+  "
+  aria-label="טופס מחשבון הנחות"
+  autocomplete="off"
+>
+  <fieldset aria-label="הזנת פרטי מחיר והנחות">
+    <legend class="visually-hidden">הזן מחיר ואחוזי הנחות</legend>
+    <div class="mb-3">
+      <label for="price" class="form-label fw-bold text-center w-100"
+        >מחיר מקורי (₪)</label
+      >
+      <input
+        type="number"
+        step="0.01"
+        min="0.01"
+        class="form-control text-center"
+        id="price"
+        name="price"
+        required
+        aria-required="true"
+        aria-label="הזן את מחיר המוצר לפני הנחות"
+        aria-describedby="priceHelp"
+        placeholder="לדוג' 129.90"
+        value="{{ request.form.price or '' }}"
+        inputmode="decimal"
+      />
+      <div id="priceHelp" class="form-text text-center">
+        הזן את מחיר המוצר לפני הנחות.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="percent1" class="form-label fw-bold text-center w-100"
+        >אחוז הנחה ראשונה (%)</label
+      >
+      <input
+        type="number"
+        step="0.01"
+        min="0"
+        max="100"
+        class="form-control text-center"
+        id="percent1"
+        name="percent1"
+        required
+        aria-required="true"
+        aria-label="אחוז הנחה ראשונה"
+        aria-describedby="percent1Help"
+        placeholder="לדוג' 20"
+        value="{{ request.form.percent1 or '' }}"
+        inputmode="decimal"
+      />
+      <div id="percent1Help" class="form-text text-center">
+        הנחת מבצע/קופה ראשונה.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="percent2" class="form-label fw-bold text-center w-100"
+        >אחוז הנחה שנייה (לא חובה)</label
+      >
+      <input
+        type="number"
+        step="0.01"
+        min="0"
+        max="100"
+        class="form-control text-center"
+        id="percent2"
+        name="percent2"
+        aria-label="אחוז הנחה שנייה (לא חובה)"
+        aria-describedby="percent2Help"
+        placeholder="אם יש – לדוג' 10"
+        value="{{ request.form.percent2 or '' }}"
+        inputmode="decimal"
+      />
+      <div id="percent2Help" class="form-text text-center">
+        ניתן להוסיף הנחת מועדון/קופון נוספת, או להשאיר ריק.
+      </div>
+    </div>
+  </fieldset>
+
+  <button
+    type="submit"
+    class="btn btn-success w-100 mt-2"
+    aria-label="חשב מחיר לאחר הנחות"
+  >
+    חשב
+  </button>
+</form>
+
+{% if result %}
+<div
+  class="result-card text-center mt-4"
+  dir="rtl"
+  style="max-width: 350px; margin: 0 auto"
+  role="status"
+  aria-live="polite"
+  tabindex="0"
+>
+  <div class="fw-bold mb-1">{{ result.label }}</div>
+  <div class="result-value mb-1" style="font-size: 1.25em">
+    <b>{{ result.value }}</b>
+  </div>
+  {% if result.discount %}
+  <div style="color: #36db9e">{{ result.discount }}</div>
+  {% endif %} {% if result.effective_percent %}
+  <div style="color: #2675d7">
+    אחוז חיסכון אפקטיבי: {{ result.effective_percent }}%
+  </div>
+  {% endif %}
+</div>
+{% endif %} {% endblock %}

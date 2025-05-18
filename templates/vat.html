@@ -1,0 +1,144 @@
+{% extends "base.html" %} {% block title %}מחשבון מע"מ{% endblock %} {% block
+content %}
+
+<h2
+  class="mb-4 text-center"
+  dir="rtl"
+  tabindex="0"
+  aria-label="כותרת: מחשבון מע״מ"
+>
+  מחשבון מע״מ
+</h2>
+
+<div
+  class="alert alert-info mb-4 text-center"
+  dir="rtl"
+  style="max-width: 420px; margin: 0 auto"
+  role="status"
+  aria-live="polite"
+>
+  הזן סכום וקבל את המחיר לפני או אחרי מע"מ.<br />
+  ניתן לבחור אם להוסיף או להסיר מע"מ, לפי הצורך.
+</div>
+
+<form
+  method="post"
+  class="mx-auto text-center"
+  dir="rtl"
+  style="
+    max-width: 340px;
+    background: #f8fcff;
+    border-radius: 1.7rem;
+    box-shadow: 0 2px 12px #cde7ef2b;
+    padding: 1.6em 1em;
+  "
+  aria-label="טופס מחשבון מע״מ"
+  autocomplete="off"
+>
+  <fieldset aria-label="שדות מחשבון מע״מ">
+    <legend class="visually-hidden">הזן סכום ובחר פעולה</legend>
+    <div class="mb-3">
+      <label for="amount" class="form-label fw-bold text-center w-100">
+        סכום לחישוב (₪)
+      </label>
+      <input
+        type="number"
+        step="0.01"
+        class="form-control text-center"
+        id="amount"
+        name="amount"
+        required
+        aria-required="true"
+        aria-label="הזן סכום לחישוב"
+        min="0.01"
+        placeholder="הזן סכום..."
+        value="{{ request.form.amount or '' }}"
+        inputmode="decimal"
+      />
+    </div>
+    <div class="mb-3">
+      <fieldset class="w-100" aria-label="בחירת פעולה לחישוב מע״מ">
+        <legend
+          class="form-label fw-bold d-block text-center mb-2 w-100 visually-hidden"
+          tabindex="0"
+        >
+          מה ברצונך לבצע?
+        </legend>
+        <div
+          class="btn-group w-100 justify-content-center"
+          role="radiogroup"
+          aria-label="מע״מ פעולה"
+          dir="rtl"
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            name="vat_action"
+            id="vatAdd"
+            value="add"
+            autocomplete="off"
+            {%
+            if
+            request.form.vat_action
+            !="remove"
+            %}checked{%
+            endif
+            %}
+            aria-labelledby="label-vatAdd"
+            required
+            aria-required="true"
+          />
+          <label class="btn btn-outline-primary" id="label-vatAdd" for="vatAdd">
+            הוספת מע״מ
+          </label>
+          <input type="radio" class="btn-check" name="vat_action" id="vatRemove"
+          value="remove" autocomplete="off" {% if request.form.vat_action ==
+          'remove' %}checked{% endif %} aria-labelledby="label-vatRemove"
+          required aria-required="true" />
+          <label
+            class="btn btn-outline-primary"
+            id="label-vatRemove"
+            for="vatRemove"
+          >
+            הסרת מע״מ
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </fieldset>
+  <button
+    type="submit"
+    class="btn btn-success w-100 mt-3"
+    aria-label="חשב סכום כולל/ללא מע״מ"
+  >
+    חשב
+  </button>
+  {% if error %}
+  <div
+    class="alert alert-danger mt-3 text-center"
+    dir="rtl"
+    style="font-size: 1em"
+    role="alert"
+    aria-live="assertive"
+    tabindex="0"
+  >
+    {{ error }}
+  </div>
+  {% endif %}
+</form>
+
+{% if result %}
+<div
+  class="result-card text-center mt-4"
+  dir="rtl"
+  style="max-width: 350px; margin: 0 auto"
+  role="status"
+  aria-live="polite"
+  tabindex="0"
+>
+  <div>{{ result.label }}</div>
+  <div class="result-value" style="font-size: 1.25em">
+    {{ "{:,.2f}".format(result.value) }} ₪
+  </div>
+</div>
+{% endif %} {% endblock %}

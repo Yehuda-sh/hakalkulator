@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}מחשבון כסף חכם{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap RTL -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+    <!-- גוגל פונטים -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;800&display=swap"
+    />
+    <!-- CSS אישי -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='custom.css') }}"
+    />
+    <style>
+      /* ----- צבע פוקוס/דלג לתוכן ------ */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 8px;
+        background: #ffd600;
+        color: #212121;
+        padding: 8px 16px;
+        z-index: 100;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: left 0.2s;
+      }
+      .skip-link:focus {
+        left: 16px;
+        outline: 2px solid #2675d7;
+      }
+      a:focus,
+      button:focus,
+      input:focus {
+        outline: 2px solid #2675d7 !important;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 2px #ffd60055;
+      }
+      /* קונטרסט גבוה */
+      body.high-contrast,
+      body.high-contrast .container,
+      body.high-contrast .floating-nav-wrapper,
+      body.high-contrast .disclaimer-btn {
+        background: #000 !important;
+        color: #fff !important;
+      }
+      body.high-contrast a,
+      body.high-contrast button {
+        color: #ffd600 !important;
+        background: #212121 !important;
+        border-color: #ffd600 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- דלג לתוכן -->
+    <a href="#main-content" class="skip-link" tabindex="0">דלג לתוכן הראשי</a>
+    <!-- ניווט דו שכבתי יצירתי -->
+    <div
+      class="floating-nav-wrapper position-relative"
+      role="navigation"
+      aria-label="ניווט ראשי"
+    >
+      <!-- שורה עליונה – לוגו + כותרת -->
+      <div class="floating-logo-row text-center py-2">
+        <span
+          class="floating-logo d-flex align-items-center"
+          style="vertical-align: middle; gap: 12px"
+        >
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 80 80"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            id="logo"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect
+              x="18"
+              y="15"
+              width="44"
+              height="50"
+              rx="10"
+              stroke="#2ca9bc"
+              stroke-width="3"
+              fill="#e8f3fd"
+            />
+            <rect x="24" y="22" width="32" height="18" rx="4" fill="#2675d7" />
+            <text
+              id="currency-symbol"
+              x="40"
+              y="31"
+              text-anchor="middle"
+              fill="#36db9e"
+              font-family="Fredoka, Arial, sans-serif"
+              font-weight="700"
+              font-size="22"
+              dominant-baseline="middle"
+              style="user-select: none"
+            >
+              ₪
+            </text>
+            <circle cx="26" cy="48" r="4" fill="#36db9e" />
+            <circle cx="40" cy="48" r="4" fill="#36db9e" />
+            <circle cx="54" cy="48" r="4" fill="#36db9e" />
+            <circle cx="26" cy="58" r="4" fill="#2ca9bc" />
+            <circle cx="40" cy="58" r="4" fill="#2ca9bc" />
+            <circle cx="54" cy="58" r="4" fill="#2ca9bc" />
+          </svg>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              line-height: 1.1;
+              text-align: right;
+              color: #2675d7;
+              user-select: none;
+              font-family: 'Fredoka', Arial, sans-serif;
+            "
+          >
+            <span style="font-weight: 800; font-size: 18px"
+              >המחשבון שלי, המחשבון שלך</span
+            >
+            <span style="font-weight: 600; font-size: 14px; color: #36db9e"
+              >הכל במקום אחד: חישובי הנחה, מע"מ, ריבית, תשלומים והמרות
+              מטבע</span
+            >
+          </div>
+        </span>
+        <script>
+          const symbols = ["₪", "$", "€", "£", "¥", "₣", "₹", "₽"];
+          let index = 0;
+          const symbolElement = document.getElementById("currency-symbol");
+          setInterval(() => {
+            index = (index + 1) % symbols.length;
+            symbolElement.textContent = symbols[index];
+          }, 1000);
+        </script>
+      </div>
+      <!-- שורה שניה – ניווט קישורים -->
+      <nav
+        class="floating-nav-links d-flex justify-content-center align-items-center position-relative"
+        aria-label="קישורי מחשבונים"
+      >
+        {% set pages = [ ('/vat', 'מע״מ'), ('/interest', 'ריבית'), ('/payments',
+        'תשלומים'), ('/currency', 'המרת מטבע'), ('/discount', 'הנחה') ] %} {%
+        for url, label in pages %}
+        <a
+          href="{{ url }}"
+          class="floating-nav-link {% if url in request.path %}active{% endif %}"
+          data-label="{{ label }}"
+          aria-current="{% if url in request.path %}page{% endif %}"
+          >{{ label }}</a
+        >
+        {% endfor %}
+        <!-- קו אנימציה -->
+        <div id="nav-underline" aria-hidden="true"></div>
+      </nav>
+    </div>
+
+    <!-- בלוק ממותג לכותרת ראשית -->
+
+    <!-- תוכן משתנה -->
+    <main id="main-content" tabindex="-1" role="main">
+      <div class="container">{% block content %} {% endblock %}</div>
+    </main>
+
+    <!-- דיסקליימר בעיצוב מודרני -->
+    <div style="display: flex; justify-content: center">
+      <div
+        class="disclaimer-btn mt-4 text-center"
+        dir="rtl"
+        aria-label="הערת שוליים"
+      >
+        <b>לתשומת לבך:</b> שערי המטבעות מתעדכנים לפי בנק ישראל.<br />
+        ייתכן פערים בין נתוני האתר לשערי החליפין בפועל.<br />
+        המידע לנוחותך בלבד – אין להסתמך עליו להחלטות כספיות.
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- כפתור נגישות עגול צף -->
+    <button
+      id="accessibility-btn"
+      title="אפשרויות נגישות"
+      aria-label="פתח תפריט נגישות"
+      style="
+        position: fixed;
+        bottom: 34px;
+        left: 22px;
+        z-index: 9000;
+        background: var(--main-blue, #2ca9bc);
+        color: #fff;
+        border: none;
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(44, 169, 188, 0.22);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.15s;
+      "
+      tabindex="0"
+      aria-haspopup="dialog"
+      aria-controls="accessibility-menu"
+    >
+      <!-- SVG עין (גישה) -->
+      <svg
+        width="29"
+        height="29"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="9.5"
+          ry="6.5"
+          stroke="#fff"
+          stroke-width="2"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="2.8"
+          fill="#fff"
+          stroke="#2675d7"
+          stroke-width="2"
+        />
+      </svg>
+    </button>
+    <!-- תפריט נגישות מדוגם בסיסי -->
+    <div
+      id="accessibility-menu"
+      style="
+        display: none;
+        position: fixed;
+        bottom: 98px;
+        left: 24px;
+        z-index: 10001;
+        background: #fff;
+        color: #222;
+        border-radius: 12px;
+        box-shadow: 0 3px 12px #0002;
+        min-width: 180px;
+        padding: 12px;
+      "
+    >
+      <button
+        onclick="toggleContrast()"
+        class="btn btn-sm btn-outline-primary w-100 mb-2"
+        aria-pressed="false"
+        id="contrast-btn"
+      >
+        קונטרסט גבוה
+      </button>
+      <button
+        onclick="increaseFont()"
+        class="btn btn-sm btn-outline-primary w-100"
+        aria-pressed="false"
+        id="font-btn"
+      >
+        הגדל טקסט
+      </button>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".floating-nav-link");
+        const underline = document.getElementById("nav-underline");
+        function moveUnderline(el) {
+          if (!el) return;
+          const nav = el.parentNode;
+          const navRect = nav.getBoundingClientRect();
+          const elRect = el.getBoundingClientRect();
+          underline.style.right = navRect.right - elRect.right + "px";
+          underline.style.width = elRect.width + "px";
+        }
+        // highlight on load
+        let active = document.querySelector(".floating-nav-link.active");
+        moveUnderline(active);
+        // highlight on hover
+        navLinks.forEach((link) => {
+          link.addEventListener("mouseenter", (e) => moveUnderline(link));
+          link.addEventListener("mouseleave", (e) => moveUnderline(active));
+        });
+
+        // כפתור ותפריט נגישות
+        const accessBtn = document.getElementById("accessibility-btn");
+        const menu = document.getElementById("accessibility-menu");
+        accessBtn.addEventListener("click", function () {
+          menu.style.display = menu.style.display === "none" ? "block" : "none";
+          if (menu.style.display === "block")
+            menu.querySelector("button").focus();
+        });
+        // סגירה בלחיצה חוץ
+        document.addEventListener("click", function (e) {
+          if (!menu.contains(e.target) && e.target !== accessBtn) {
+            menu.style.display = "none";
+          }
+        });
+        // ESC לסגירה
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") menu.style.display = "none";
+        });
+      });
+
+      // פונקציות תפריט נגישות
+      function toggleContrast() {
+        document.body.classList.toggle("high-contrast");
+        let btn = document.getElementById("contrast-btn");
+        let pressed = btn.getAttribute("aria-pressed") === "true";
+        btn.setAttribute("aria-pressed", String(!pressed));
+      }
+      function increaseFont() {
+        let html = document.documentElement;
+        let btn = document.getElementById("font-btn");
+        let curr = parseFloat(getComputedStyle(html).fontSize);
+        html.style.fontSize = (curr < 22 ? curr + 2 : 16) + "px";
+        let pressed = btn.getAttribute("aria-pressed") === "true";
+        btn.setAttribute("aria-pressed", String(!pressed));
+      }
+    </script>
+  </body>
+</html>

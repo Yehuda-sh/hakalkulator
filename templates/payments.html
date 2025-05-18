@@ -1,0 +1,275 @@
+{% extends "base.html" %} {% block title %}המרת מטבע{% endblock %} {% block
+content %}
+
+<h2
+  class="mb-4 text-center"
+  dir="rtl"
+  tabindex="0"
+  aria-label="כותרת: המרת מטבע"
+>
+  המרת מטבע
+</h2>
+
+<div
+  class="alert alert-info mb-4 text-center"
+  dir="rtl"
+  style="max-width: 430px; margin: 0 auto"
+  role="status"
+  aria-live="polite"
+>
+  המירו סכומים בין שקלים למטבעות זרים בזמן אמת – השערים מעודכנים לפי בנק
+  ישראל.<br />
+  בחרו את המטבע, הזינו את הסכום וקבלו תוצאה מיד.
+</div>
+
+<form
+  method="post"
+  class="currency-form mx-auto text-center"
+  dir="rtl"
+  aria-label="טופס המרת מטבע"
+  style="
+    max-width: 370px;
+    background: #f8fcff;
+    border-radius: 1.6rem;
+    box-shadow: 0 2px 12px #cde7ef2b;
+    padding: 1.7em 1em;
+  "
+  autocomplete="off"
+>
+  <div class="mb-3">
+    <label for="amount" class="form-label fw-bold text-center w-100">
+      סכום בש"ח (₪)
+    </label>
+    <input
+      type="number"
+      step="0.01"
+      min="0.01"
+      max="999999999"
+      class="form-control text-center"
+      id="amount"
+      name="amount"
+      required
+      aria-required="true"
+      aria-label="הזן את הסכום בשקלים"
+      aria-describedby="amountHelp"
+      placeholder="לדוג' 500"
+      value="{{ request.form.amount or '' }}"
+      inputmode="decimal"
+    />
+    <div class="form-text text-center" id="amountHelp">
+      הזן את הסכום בשקלים.
+    </div>
+  </div>
+
+  <fieldset class="mb-4" aria-label="בחירת מטבע יעד">
+    <legend
+      class="form-label fw-bold text-center w-100 mb-2 visually-hidden"
+      tabindex="0"
+    >
+      בחר מטבע יעד
+    </legend>
+    <div
+      class="d-flex flex-wrap justify-content-center gap-2"
+      role="radiogroup"
+      aria-label="מטבעות לבחירה"
+    >
+      {% for currency in currencies %} <input type="radio" class="btn-check"
+      name="currency" id="curr-{{ currency.code }}" value="{{ currency.code }}"
+      autocomplete="off" {% if (request.form.currency == currency.code) or (not
+      request.form.currency and currency.code == 'USD') %}checked{% endif %}
+      aria-labelledby="label-{{ currency.code }}" required aria-required="true"
+      >
+      <label
+        id="label-{{ currency.code }}"
+        class="btn btn-outline-primary d-flex flex-column align-items-center px-3 py-2"
+        style="min-width: 80px; min-height: 84px"
+        for="curr-{{ currency.code }}"
+        tabindex="0"
+        aria-label="בחר מטבע {{ currency.name }}"
+      >
+        <span class="currency-icon mb-1" aria-hidden="true">
+          {% if currency.code == "USD" %}
+          <!-- SVG לדולר -->
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M7,15.5A3.5,3.5,0,0,0,10.5,19h3A3.5,3.5,0,0,0,17,15.5h0A3.5,3.5,0,0,0,13.5,12h-3A3.5,3.5,0,0,1,7,8.5H7A3.5,3.5,0,0,1,10.5,5h3A3.5,3.5,0,0,1,17,8.5"
+              style="
+                fill: none;
+                stroke: #2ca9bc;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              "
+            ></path>
+            <line
+              x1="12"
+              y1="21"
+              x2="12"
+              y2="3"
+              style="
+                fill: none;
+                stroke: #2675d7;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              "
+            ></line>
+          </svg>
+          {% elif currency.code == "EUR" %}
+          <!-- SVG לאירו -->
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M16,6.41l-10,3M16,10.59l-10,3M17,8.5a7.5,7.5,0,1,0,0,7"
+              style="
+                fill: none;
+                stroke: #2ca9bc;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              "
+            ></path>
+          </svg>
+          {% elif currency.code == "GBP" %}
+          <!-- SVG ללירה -->
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M16,21H5c4.25-7.17,1-9.17,1-13,0-2.63,1-5,5-5s5,4,5,4"
+              style="
+                fill: none;
+                stroke: #2ca9bc;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              "
+            ></path>
+            <line
+              x1="4"
+              y1="12"
+              x2="12"
+              y2="12"
+              style="
+                fill: none;
+                stroke: #2675d7;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              "
+            ></line>
+          </svg>
+          {% elif currency.code == "JPY" %}
+          <!-- SVG לין -->
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M12,21V13M12,13V3M12,13H7.5M12,13h4.5"
+              style="
+                fill: none;
+                stroke: #2ca9bc;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              "
+            ></path>
+          </svg>
+          {% elif currency.code == "CHF" %}
+          <!-- SVG לפרנק -->
+          <svg
+            width="34"
+            height="34"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M9,11h9M9,21V3h9"
+              style="
+                fill: none;
+                stroke: #2ca9bc;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              "
+            ></path>
+            <line
+              x1="6"
+              y1="15"
+              x2="15"
+              y2="15"
+              style="
+                fill: none;
+                stroke: #2675d7;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 2;
+              "
+            ></line>
+          </svg>
+          {% else %}
+          <!-- סמל כללי -->
+          <span style="font-size: 2em">{{ currency.symbol }}</span>
+          {% endif %}
+        </span>
+        <span class="currency-name fw-bold">{{ currency.name }}</span>
+      </label>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  <button
+    type="submit"
+    class="btn btn-success w-100 mt-2"
+    aria-label="בצע המרה"
+  >
+    המר
+  </button>
+  {% if error %}
+  <div
+    class="alert alert-danger mt-3 text-center"
+    dir="rtl"
+    role="alert"
+    aria-live="assertive"
+    tabindex="0"
+  >
+    {{ error }}
+  </div>
+  {% endif %}
+</form>
+
+{% if result %}
+<div
+  class="result-card text-center mt-4"
+  dir="rtl"
+  style="max-width: 350px; margin: 0 auto"
+  role="status"
+  aria-live="polite"
+  tabindex="0"
+>
+  <div>{{ result.label }}</div>
+  <div class="result-value" style="font-size: 1.25em">
+    <b>{{ result.value }}</b>
+  </div>
+</div>
+{% endif %} {% endblock %}
