@@ -14,5 +14,6 @@ RUN pip3 install -r requirements.txt
 COPY . .
 
 EXPOSE 8080
+ENV FLASK_APP=app:app
 
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8080"]
