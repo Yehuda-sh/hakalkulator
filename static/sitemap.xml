@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hakalkulator.onrender.com/</loc>
+    <loc>https://hakalkulator.fly.dev/</loc>
   </url>
   <url>
-    <loc>https://hakalkulator.onrender.com/vat</loc>
+    <loc>https://hakalkulator.fly.dev/vat</loc>
   </url>
   <url>
-    <loc>https://hakalkulator.onrender.com/interest</loc>
+    <loc>https://hakalkulator.fly.dev/interest</loc>
   </url>
   <url>
-    <loc>https://hakalkulator.onrender.com/discount</loc>
+    <loc>https://hakalkulator.fly.dev/payments</loc>
   </url>
   <url>
-    <loc>https://hakalkulator.onrender.com/currency</loc>
+    <loc>https://hakalkulator.fly.dev/currency</loc>
   </url>
   <url>
-    <loc>https://hakalkulator.onrender.com/about</loc>
+    <loc>https://hakalkulator.fly.dev/discount</loc>
   </url>
   <url>
-    <loc>https://hakalkulator.onrender.com/privacy</loc>
+    <loc>https://hakalkulator.fly.dev/about</loc>
+  </url>
+  <url>
+    <loc>https://hakalkulator.fly.dev/privacy</loc>
   </url>
 </urlset>
