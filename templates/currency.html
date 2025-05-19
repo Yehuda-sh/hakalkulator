@@ -11,9 +11,8 @@
 </h2>
 
 <div
-  class="alert alert-info mb-4 text-center"
+  class="alert alert-info mb-4 text-center currency-alert"
   dir="rtl"
-  style="max-width: 430px; margin: 0 auto"
   role="status"
   aria-live="polite"
 >
@@ -27,13 +26,6 @@
   class="currency-form mx-auto text-center"
   dir="rtl"
   aria-label="טופס המרת מטבע"
-  style="
-    max-width: 370px;
-    background: #f8fcff;
-    border-radius: 1.6rem;
-    box-shadow: 0 2px 12px #cde7ef2b;
-    padding: 1.7em 1em;
-  "
   autocomplete="off"
 >
   <div class="mb-3">
@@ -69,7 +61,7 @@
       בחר מטבע יעד
     </legend>
     <div
-      class="d-flex flex-wrap justify-content-center gap-2"
+      class="currency-radio-group d-flex flex-wrap justify-content-center gap-2"
       role="radiogroup"
       aria-label="מטבעות לבחירה"
     >
@@ -81,8 +73,7 @@
       >
       <label
         id="label-{{ currency.code }}"
-        class="btn btn-outline-primary d-flex flex-column align-items-center px-3 py-2"
-        style="min-width: 80px; min-height: 84px"
+        class="btn btn-outline-primary d-flex flex-column align-items-center px-3 py-2 currency-btn"
         for="curr-{{ currency.code }}"
         tabindex="0"
         aria-label="בחר מטבע {{ currency.name }}"
@@ -148,7 +139,7 @@
           </svg>
           {% else %}
           <!-- סמל כללי -->
-          <span style="font-size: 2em">{{ currency.symbol }}</span>
+          <span class="currency-symbol">{{ currency.symbol }}</span>
           {% endif %}
         </span>
         <span class="currency-name fw-bold">{{ currency.name }}</span>
@@ -181,7 +172,6 @@
 <div
   class="result-card text-center mt-4"
   dir="rtl"
-  style="max-width: 350px; margin: 0 auto"
   role="status"
   aria-live="polite"
   tabindex="0"

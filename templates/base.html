@@ -20,6 +20,7 @@
       href="https://fonts.googleapis.com/css2?family=Assistant:wght@700;900&display=swap"
       rel="stylesheet"
     />
+    <!-- Custom CSS -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='custom.css') }}"
@@ -39,171 +40,6 @@
       type="image/x-icon"
       href="{{ url_for('static', filename='favicon.ico') }}"
     />
-    <style>
-      html,
-      body {
-        max-width: 100vw;
-        overflow-x: hidden;
-        background: #f8fcff;
-        font-family: "Assistant", Arial, sans-serif;
-      }
-      /* Skip link */
-      .skip-link {
-        position: absolute;
-        left: -9999px;
-        top: 8px;
-        background: #ffd600;
-        color: #212121;
-        padding: 8px 16px;
-        z-index: 100;
-        font-weight: bold;
-        border-radius: 8px;
-        transition: left 0.2s;
-      }
-      .skip-link:focus {
-        left: 16px;
-        outline: 2px solid #2675d7;
-      }
-      a:focus,
-      button:focus,
-      input:focus {
-        outline: 2px solid #2675d7 !important;
-        outline-offset: 2px;
-        box-shadow: 0 0 0 2px #ffd60055;
-      }
-      /* לוגו וניווט - קופסה מודרנית */
-      .main-header-box {
-        margin: 0 auto 18px auto;
-        padding: 0 0 16px 0;
-        max-width: 800px;
-        border-radius: 2.2em;
-        background: linear-gradient(90deg, #f8fcff 60%, #f1faf7 100%);
-        box-shadow: 0 4px 24px #e0f2fc77;
-        border: 1.5px solid #e3f2fd;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        z-index: 12;
-        width: 100%;
-      }
-      .main-header-logo {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        padding: 22px 0 0 0;
-        background: none;
-        justify-content: center;
-        width: 100%;
-      }
-      .main-header-logo .icon {
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #36db9e 65%, #2ca9bc 100%);
-        width: 52px;
-        height: 52px;
-        border-radius: 1.5em 2.5em 2.5em 1.5em/2em 2.5em 1.5em 1.5em;
-        box-shadow: 0 6px 22px #2ca9bc38;
-        position: relative;
-      }
-      .main-header-logo .txt-main {
-        font-weight: 900;
-        font-size: 2.1rem;
-        color: #1662be;
-        letter-spacing: 0.02em;
-        margin-bottom: 2px;
-        font-family: "Assistant", Arial, sans-serif;
-      }
-      .main-header-logo .txt-sub {
-        color: #36db9e;
-        font-size: 1.01rem;
-        font-weight: 700;
-        margin-right: 2px;
-        letter-spacing: 0.01em;
-        font-family: "Assistant", Arial, sans-serif;
-      }
-      .main-nav-bar {
-        margin: 14px auto 0 auto;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        justify-content: center;
-        font-family: "Assistant", Arial, sans-serif;
-        font-size: 1.1em;
-        flex-wrap: wrap;
-        width: 100%;
-        padding: 0;
-        background: none;
-      }
-      .main-nav-bar a {
-        padding: 10px 11px;
-        margin: 0 2px;
-        color: #2675d7;
-        background: #f5fafe;
-        font-weight: 700;
-        border-radius: 1.2em;
-        transition: background 0.2s, color 0.2s;
-        text-decoration: none;
-        outline: none;
-        display: inline-block;
-        position: relative;
-        font-size: 1em;
-      }
-      @media (max-width: 600px) {
-        .main-header-box {
-          padding-bottom: 7px;
-          max-width: 100vw;
-          border-radius: 0 0 2.2em 2.2em;
-        }
-        .main-header-logo {
-          flex-direction: column;
-          padding: 10px 0 0 0;
-          gap: 6px;
-          width: 100%;
-        }
-        .main-nav-bar {
-          flex-direction: column;
-          gap: 2px;
-          padding: 0;
-          width: 100vw;
-          box-sizing: border-box;
-        }
-        .container {
-          max-width: 99vw !important;
-          padding-left: 7px !important;
-          padding-right: 7px !important;
-        }
-        .main-header-logo .txt-main {
-          font-size: 1.35rem;
-        }
-      }
-      .main-nav-bar a.active,
-      .main-nav-bar a[aria-current="page"] {
-        color: #fff;
-        background: linear-gradient(92deg, #2ca9bc 70%, #2675d7 100%);
-        box-shadow: 0 3px 9px #2ca9bc33;
-      }
-      .main-nav-bar a:hover:not(.active):not([aria-current="page"]) {
-        background: linear-gradient(94deg, #f0fcf5 70%, #e3f1fa 100%);
-        color: #1662be;
-      }
-      /* קונטרסט גבוה */
-      body.high-contrast,
-      body.high-contrast .container,
-      body.high-contrast .main-header-box,
-      body.high-contrast .disclaimer-btn {
-        background: #000 !important;
-        color: #fff !important;
-      }
-      body.high-contrast a,
-      body.high-contrast button {
-        color: #ffd600 !important;
-        background: #212121 !important;
-        border-color: #ffd600 !important;
-      }
-    </style>
   </head>
   <body>
     <!-- דלג לתוכן -->
@@ -275,12 +111,6 @@
         class="disclaimer-btn mt-4 text-center"
         dir="rtl"
         aria-label="הערת שוליים"
-        style="
-          background: #f5fafe;
-          border-radius: 1em;
-          max-width: 580px;
-          box-shadow: 0 2px 12px #cde7ef2b;
-        "
       >
         <b>לתשומת לבך:</b> שערי המטבעות מתעדכנים לפי בנק ישראל.<br />
         ייתכן פערים בין נתוני האתר לשערי החליפין בפועל.<br />
@@ -290,28 +120,11 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- כפתור נגישות עגול צף -->
+    <!-- תפריט נגישות -->
     <button
       id="accessibility-btn"
       title="אפשרויות נגישות"
       aria-label="פתח תפריט נגישות"
-      style="
-        position: fixed;
-        bottom: 34px;
-        left: 22px;
-        z-index: 9000;
-        background: var(--main-blue, #2ca9bc);
-        color: #fff;
-        border: none;
-        width: 54px;
-        height: 54px;
-        border-radius: 50%;
-        box-shadow: 0 2px 8px rgba(44, 169, 188, 0.22);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: 0.15s;
-      "
       tabindex="0"
       aria-haspopup="dialog"
       aria-controls="accessibility-menu"
@@ -343,23 +156,7 @@
         />
       </svg>
     </button>
-    <!-- תפריט נגישות בסיסי -->
-    <div
-      id="accessibility-menu"
-      style="
-        display: none;
-        position: fixed;
-        bottom: 98px;
-        left: 24px;
-        z-index: 10001;
-        background: #fff;
-        color: #222;
-        border-radius: 12px;
-        box-shadow: 0 3px 12px #0002;
-        min-width: 180px;
-        padding: 12px;
-      "
-    >
+    <div id="accessibility-menu">
       <button
         onclick="toggleContrast()"
         class="btn btn-sm btn-outline-primary w-100 mb-2"
@@ -378,7 +175,7 @@
       </button>
     </div>
     <script>
-      // כפתור ותפריט נגישות
+      // (נשאר כפי שהיה - בלי שינוי)
       document.addEventListener("DOMContentLoaded", function () {
         const accessBtn = document.getElementById("accessibility-btn");
         const menu = document.getElementById("accessibility-menu");
@@ -387,18 +184,15 @@
           if (menu.style.display === "block")
             menu.querySelector("button").focus();
         });
-        // סגירה בלחיצה חוץ
         document.addEventListener("click", function (e) {
           if (!menu.contains(e.target) && e.target !== accessBtn) {
             menu.style.display = "none";
           }
         });
-        // ESC לסגירה
         document.addEventListener("keydown", function (e) {
           if (e.key === "Escape") menu.style.display = "none";
         });
       });
-      // פונקציות תפריט נגישות
       function toggleContrast() {
         document.body.classList.toggle("high-contrast");
         let btn = document.getElementById("contrast-btn");

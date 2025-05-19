@@ -11,9 +11,8 @@ content %}
 </h2>
 
 <div
-  class="alert alert-info mb-4 text-center"
+  class="alert alert-info mb-4 text-center discount-desc"
   dir="rtl"
-  style="max-width: 430px; margin: 0 auto"
   role="status"
   aria-live="polite"
 >
@@ -24,15 +23,8 @@ content %}
 
 <form
   method="post"
-  class="mx-auto text-center"
+  class="discount-form mx-auto text-center"
   dir="rtl"
-  style="
-    max-width: 340px;
-    background: #f8fcff;
-    border-radius: 1.6rem;
-    box-shadow: 0 2px 12px #cde7ef2b;
-    padding: 1.6em 1em;
-  "
   aria-label="טופס מחשבון הנחות"
   autocomplete="off"
 >
@@ -122,21 +114,20 @@ content %}
 
 {% if result %}
 <div
-  class="result-card text-center mt-4"
+  class="result-card text-center mt-4 discount-result"
   dir="rtl"
-  style="max-width: 350px; margin: 0 auto"
   role="status"
   aria-live="polite"
   tabindex="0"
 >
   <div class="fw-bold mb-1">{{ result.label }}</div>
-  <div class="result-value mb-1" style="font-size: 1.25em">
+  <div class="result-value mb-1">
     <b>{{ result.value }}</b>
   </div>
   {% if result.discount %}
-  <div style="color: #36db9e">{{ result.discount }}</div>
+  <div class="discount-amount">{{ result.discount }}</div>
   {% endif %} {% if result.effective_percent %}
-  <div style="color: #2675d7">
+  <div class="discount-effective">
     אחוז חיסכון אפקטיבי: {{ result.effective_percent }}%
   </div>
   {% endif %}

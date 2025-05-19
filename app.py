@@ -98,13 +98,14 @@ def payments():
     error = None
     if request.method == 'POST':
         try:
-            amount_str = request.form.get('amount', '').strip()
-            payments_str = request.form.get('payments', '').strip()
-            payment_rate_str = request.form.get('payment_rate', '').strip()
+            amount = float(request.form.get('total_amount', '').strip())
+            payments = int(request.form.get('payments', '').strip())
+            payment_rate = float(request.form.get('rate', '').strip())
 
-            amount = float(amount_str)
-            payments = int(payments_str)
-            payment_rate = float(payment_rate_str)
+
+            amount = float(amount)
+            payments = int(payments)
+            payment_rate = float(payment_rate)
 
             # ולידציה: מספר תשלומים בין 1 ל־1000, ריבית עד 999.999, סכום > 0
             if amount <= 0 or payments < 1 or payments > 1000 or payment_rate < 0 or payment_rate > 999.999:

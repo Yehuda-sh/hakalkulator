@@ -11,9 +11,8 @@ endblock %} {% block content %}
 </h2>
 
 <div
-  class="alert alert-info mb-4 text-center"
+  class="alert alert-info mb-4 text-center interest-desc"
   dir="rtl"
-  style="max-width: 430px; margin: 0 auto"
   role="status"
   aria-live="polite"
 >
@@ -24,15 +23,8 @@ endblock %} {% block content %}
 
 <form
   method="post"
-  class="mx-auto text-center"
+  class="interest-form mx-auto text-center"
   dir="rtl"
-  style="
-    max-width: 350px;
-    background: #f8fcff;
-    border-radius: 1.7rem;
-    box-shadow: 0 2px 12px #cde7ef2b;
-    padding: 1.7em 1em;
-  "
   aria-label="טופס מחשבון ריבית"
   autocomplete="off"
 >
@@ -179,16 +171,13 @@ endblock %} {% block content %}
 
 {% if result %}
 <div
-  class="result-card text-center mt-4"
+  class="result-card text-center mt-4 interest-result"
   dir="rtl"
-  style="max-width: 350px; margin: 0 auto"
   role="status"
   aria-live="polite"
   tabindex="0"
 >
   <div>{{ result.label }}</div>
-  <div class="result-value" style="font-size: 1.25em">
-    {{ "{:,.2f}".format(result.value) }} ₪
-  </div>
+  <div class="result-value">{{ "{:,.2f}".format(result.value) }} ₪</div>
 </div>
 {% endif %} {% endblock %}

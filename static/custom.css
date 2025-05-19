@@ -7,128 +7,176 @@
   --radius-l: 1.3rem;
 }
 
-body {
-  font-family: "Heebo", "Assistant", Arial, sans-serif;
-  background: linear-gradient(135deg, #e8f3fd 40%, #ffffff 100%);
-  min-height: 100vh;
-}
-html,
-body {
-  width: 100vw;
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-.container,
-.floating-nav-wrapper,
-.floating-logo-row,
-.floating-logo-row > div,
-.floating-logo-row > span,
-.floating-logo-row .logo-container {
-  max-width: 100vw !important;
-  min-width: 0 !important;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-@media (max-width: 600px) {
-  .floating-logo-row > div {
-    padding: 10px 4vw !important;
-    min-width: 0 !important;
-    max-width: 98vw !important;
-  }
+html,
+body {
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #e8f3fd 40%, #ffffff 100%);
+  font-family: "Heebo", "Assistant", Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.navbar,
-.navbar-nav .nav-link {
-  border-radius: var(--radius-l);
+/* קונטיינרים */
+.container,
+.main-header-box,
+.main-header-logo,
+.main-nav-bar,
+.floating-nav-wrapper,
+.floating-logo-row,
+.result-card,
+form,
+main,
+section,
+nav {
+  max-width: 100%;
+  width: 100%;
 }
 
-.navbar {
-  box-shadow: var(--main-shadow);
-  background: #fff;
+/* קונטיינר ראשי */
+.container {
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+}
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  background: #ffd600;
+  color: #212121;
+  padding: 8px 16px;
+  z-index: 100;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: left 0.2s;
+  white-space: nowrap;
+  /* מוסתר ויזואלית, גלוי לנגישות */
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
 }
 
-.nav-link.active,
-.nav-link:focus,
-.nav-link:hover {
-  background: var(--main-light) !important;
-  color: var(--main-dark) !important;
+.skip-link:focus {
+  clip: auto;
+  clip-path: none;
+  height: auto;
+  width: auto;
+  left: 16px;
+  outline: 2px solid #2675d7;
+  overflow: visible;
+}
+
+a:focus,
+button:focus,
+input:focus {
+  outline: 2px solid #2675d7 !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #ffd60055;
+}
+
+/* ניווט ולוגו */
+.main-header-box {
+  margin: 0 auto 18px auto;
+  padding: 0 0 16px 0;
+  max-width: 800px;
   border-radius: var(--radius-xl);
-  transition: 0.17s;
+  background: linear-gradient(90deg, #f8fcff 60%, #f1faf7 100%);
+  box-shadow: 0 4px 24px #e0f2fc77;
+  border: 1.5px solid #e3f2fd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 12;
+  width: 100%;
 }
 
-.brand-header {
-  margin-top: 16px;
-  margin-bottom: 22px;
-  text-align: center;
+.main-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 0 0 0;
+  background: none;
+  justify-content: center;
+  width: 100%;
 }
-
-.brand-title {
+.main-header-logo .icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #36db9e 65%, #2ca9bc 100%);
+  width: 52px;
+  height: 52px;
+  border-radius: 1.5em 2.5em 2.5em 1.5em/2em 2.5em 1.5em 1.5em;
+  box-shadow: 0 6px 22px #2ca9bc38;
+  position: relative;
+}
+.main-header-logo .txt-main {
+  font-weight: 900;
   font-size: 2.1rem;
-  font-weight: 700;
-  color: var(--main-dark);
-  letter-spacing: 1px;
-  margin-top: 0.3em;
+  color: #1662be;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+  font-family: "Assistant", Arial, sans-serif;
 }
-
-.brand-subtitle {
-  font-size: 1.18rem;
-  color: #4c8dbe;
-}
-
-.brand-underline {
-  width: 90px;
-  height: 5px;
-  background: linear-gradient(90deg, #65b5ff, #2ca9bc);
-  border-radius: 3px;
-  margin: 0.5rem auto 0 auto;
-}
-
-.btn,
-.btn-check:checked + .btn,
-.btn:focus,
-.btn:hover {
-  border-radius: var(--radius-l) !important;
-  box-shadow: var(--main-shadow);
-  transition: 0.18s;
-}
-
-.currency-form .btn-outline-primary {
-  border-width: 2.2px;
-  border-color: var(--main-blue);
-  color: var(--main-dark);
-  background: #fff;
-}
-.currency-form .btn-check:checked + .btn,
-.currency-form .btn-outline-primary:hover,
-.currency-form .btn-outline-primary:focus {
-  background: var(--main-blue);
-  color: #fff;
-  border-color: var(--main-dark);
-  box-shadow: var(--main-shadow);
-}
-
-.currency-icon {
-  display: block;
-  margin: 0 auto 2px auto;
-  width: 34px;
-  height: 34px;
-}
-.currency-name {
-  font-size: 0.98em;
-}
-
-.disclaimer-btn {
-  background: var(--main-light);
-  border: 1.5px solid #cce0f7;
-  color: #2675d7;
-  border-radius: var(--radius-xl);
-  padding: 0.9rem 2.1rem;
-  margin-bottom: 2.2rem;
+.main-header-logo .txt-sub {
+  color: #36db9e;
   font-size: 1.01rem;
-  box-shadow: var(--main-shadow);
+  font-weight: 700;
+  margin-right: 2px;
+  letter-spacing: 0.01em;
+  font-family: "Assistant", Arial, sans-serif;
+}
+.main-nav-bar {
+  margin: 14px auto 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  font-family: "Assistant", Arial, sans-serif;
+  font-size: 1.1em;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0;
+  background: none;
+}
+.main-nav-bar a {
+  padding: 10px 11px;
+  margin: 0 2px;
+  color: #2675d7;
+  background: #f5fafe;
+  font-weight: 700;
+  border-radius: 1.2em;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+}
+.main-nav-bar a.active,
+.main-nav-bar a[aria-current="page"] {
+  color: #fff;
+  background: linear-gradient(92deg, #2ca9bc 70%, #2675d7 100%);
+  box-shadow: 0 3px 9px #2ca9bc33;
+}
+.main-nav-bar a:hover:not(.active):not([aria-current="page"]) {
+  background: linear-gradient(94deg, #f0fcf5 70%, #e3f1fa 100%);
+  color: #1662be;
 }
 
+/* כרטיסי תוצאה */
 .result-card,
 .alert-success,
 .alert-info {
@@ -136,19 +184,50 @@ body {
   box-shadow: var(--main-shadow);
   font-size: 1.17em;
   background: linear-gradient(90deg, #e8f3fd 85%, #fff 100%);
+  max-width: 350px;
+  margin: 0 auto;
+}
+.result-value {
+  font-size: 1.25em;
+  color: #1662be;
+  font-weight: bold;
 }
 
+/* טפסים */
+form,
+.currency-form,
+.discount-form,
+.interest-form,
+.vat-form,
+.result-container {
+  max-width: 370px;
+  width: 100%;
+  background: #f8fcff;
+  border-radius: 1.7rem;
+  box-shadow: 0 2px 12px #cde7ef2b;
+  padding: 1.7em 1em;
+  margin: 0 auto;
+}
 input,
 select,
 textarea {
   border-radius: var(--radius-l) !important;
   border-color: #b0d4e2 !important;
 }
-
 button,
 .btn {
   font-size: 1.05em;
   font-weight: 500;
+}
+
+/* כפתורים */
+.btn,
+.btn-check:checked + .btn,
+.btn:focus,
+.btn:hover {
+  border-radius: var(--radius-l) !important;
+  box-shadow: var(--main-shadow);
+  transition: 0.18s;
 }
 .btn-success,
 .btn-success:focus {
@@ -163,7 +242,6 @@ button,
   transition: background 0.15s, box-shadow 0.16s, transform 0.13s;
   padding: 0.7em 1.5em;
 }
-
 .btn-success:hover,
 .btn-success:active {
   background: linear-gradient(90deg, #2ca9bc 75%, #2675d7 100%);
@@ -172,12 +250,10 @@ button,
   transform: translateY(-2px) scale(1.045);
   outline: none;
 }
-
 .btn-success:active {
   transform: translateY(1px) scale(0.99);
   box-shadow: 0 2px 5px rgba(44, 169, 188, 0.13);
 }
-
 .btn-success:disabled {
   background: #a6ece5;
   color: #b0b0b0;
@@ -185,87 +261,73 @@ button,
   box-shadow: none;
   opacity: 0.75;
 }
-.floating-nav-wrapper {
-  position: sticky;
-  top: 0;
-  z-index: 1111;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 2px 14px rgba(44, 169, 188, 0.13);
-  margin-bottom: 1.3rem;
-  border-bottom-left-radius: 2.2rem;
-  border-bottom-right-radius: 2.2rem;
-}
 
-.floating-logo-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.7em;
-}
-
-.floating-title {
-  font-size: 2.1rem;
+/* דיסקליימר */
+.disclaimer-btn {
+  background: var(--main-light);
+  border: 1.5px solid #cce0f7;
   color: #2675d7;
-  letter-spacing: 1px;
-  line-height: 2.4rem;
-  display: inline-block;
-  position: relative;
-  font-weight: 800;
-  vertical-align: middle;
+  border-radius: var(--radius-xl);
+  padding: 0.9rem 2.1rem;
+  margin-bottom: 2.2rem;
+  font-size: 1.01rem;
+  box-shadow: var(--main-shadow);
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.floating-nav-links {
-  min-height: 52px;
-  padding-bottom: 12px;
-  padding-top: 2px;
-  position: relative;
-}
-
-.floating-nav-link {
-  display: inline-block;
-  margin: 0 18px;
-  padding: 7px 14px 6px 14px;
-  border-radius: 1.1em;
-  font-size: 1.13em;
+/* ענן תגיות */
+.tag-cloud .badge {
+  font-size: 1em;
   font-weight: 500;
-  color: #2675d7;
-  text-decoration: none;
-  position: relative;
-  z-index: 2;
-  transition: background 0.18s, color 0.17s, box-shadow 0.14s;
-}
-.floating-nav-link.active,
-.floating-nav-link:hover {
-  background: linear-gradient(90deg, #e8f3fd 65%, #c3f2ed 100%);
-  color: #2ca9bc;
-  box-shadow: 0 2px 10px rgba(44, 169, 188, 0.07);
+  border-radius: 1.5em;
+  background: #f3f6fc !important;
+  color: #2675d7 !important;
+  border: 1px solid #e4eaf4;
+  margin: 4px;
+  padding: 0.5em 1.1em;
+  box-shadow: 0 1px 3px #e0e8f633;
+  cursor: default;
+  user-select: none;
 }
 
-#nav-underline {
-  position: absolute;
-  bottom: 2px;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, #36db9e 20%, #2ca9bc 60%, #2675d7 100%);
-  border-radius: 4px;
-  transition: right 0.33s cubic-bezier(0.7, 0.09, 0.43, 1.25),
-    width 0.28s cubic-bezier(0.7, 0.09, 0.43, 1.25);
-  z-index: 1;
-  box-shadow: 0 0 9px 2px #c2f4f0a1;
-  width: 70px; /* ברירת מחדל – יעודכן ב-JS */
+/* מחשבון המרת מטבע */
+.currency-form .btn-outline-primary {
+  border-width: 2.2px;
+  border-color: var(--main-blue);
+  color: var(--main-dark);
+  background: #fff;
+}
+.currency-form .btn-check:checked + .btn,
+.currency-form .btn-outline-primary:hover,
+.currency-form .btn-outline-primary:focus {
+  background: var(--main-blue);
+  color: #fff;
+  border-color: var(--main-dark);
+  box-shadow: var(--main-shadow);
+}
+.currency-icon {
+  display: block;
+  margin: 0 auto 2px auto;
+  width: 34px;
+  height: 34px;
+}
+.currency-name {
+  font-size: 0.98em;
 }
 
-/* === עיצוב כפתור נגישות צף === */
+/* כפתור נגישות */
 #accessibility-btn {
   position: fixed;
-  bottom: 34px;
-  left: 22px;
-  z-index: 9000;
+  bottom: 26px;
+  left: 18px;
+  z-index: 9999;
   background: var(--main-blue, #2ca9bc);
   color: #fff;
   border: none;
-  width: 54px;
-  height: 54px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(44, 169, 188, 0.22);
   display: flex;
@@ -274,6 +336,10 @@ button,
   cursor: pointer;
   transition: background 0.16s, box-shadow 0.13s, outline 0.14s;
   outline: none;
+  padding: 0;
+  /* הרחב אזור לחיץ */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 #accessibility-btn:focus,
 #accessibility-btn:hover {
@@ -281,15 +347,156 @@ button,
   box-shadow: 0 3px 12px rgba(38, 117, 215, 0.18);
   outline: 2.5px solid #a2dbe6;
 }
+
 #accessibility-btn svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+  pointer-events: none;
+}
+
+/* תיקון אזור לחיץ */
+#accessibility-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+/* תפריט */
+#accessibility-menu {
+  display: none;
+  position: fixed;
+  bottom: 84px;
+  left: 18px;
+  z-index: 10000;
+  background: #fff;
+  color: #222;
+  border-radius: 18px;
+  box-shadow: 0 3px 18px #cde7ef33;
+  padding: 10px 12px;
+  min-width: 144px;
+  width: 170px;
+  max-width: 92vw;
+  text-align: center;
+  border: 1px solid #e3f2fd;
+  animation: fadeinup 0.23s;
+}
+@keyframes fadeinup {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#accessibility-menu button {
+  width: 90%;
+  min-width: 90px;
+  max-width: 160px;
+  margin: 0 auto 10px auto;
+  padding: 10px 0;
+  border-radius: 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background 0.17s, color 0.17s, box-shadow 0.14s;
+  box-shadow: 0 1px 7px #e0f2fc55;
+  border: 2px solid #2ca9bc;
+  color: #2675d7;
+  background: #f8fcff;
   display: block;
 }
-#accessibility-btn:active {
-  background: #2675d7;
+#accessibility-menu button:last-child {
+  margin-bottom: 0;
+}
+#accessibility-menu button:focus,
+#accessibility-menu button:hover {
+  background: #e8f3fd;
+  color: #1662be;
+  border-color: #36db9e;
   outline: none;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+  #accessibility-btn {
+    left: 6px;
+    bottom: 9px;
+    width: 44px;
+    height: 44px;
+  }
+  #accessibility-menu {
+    left: 3px;
+    bottom: 58px;
+    min-width: 106px;
+    width: 122px;
+    padding: 6px 2px;
+  }
+  #accessibility-menu button {
+    min-width: 80px;
+    max-width: 120px;
+    width: 98%;
+    font-size: 0.95em;
+    padding: 7px 0;
+  }
+}
+
+/* קונטרסט גבוה */
+body.high-contrast,
+body.high-contrast .container,
+body.high-contrast .main-header-box,
+body.high-contrast .disclaimer-btn {
+  background: #000 !important;
+  color: #fff !important;
+}
+body.high-contrast a,
+body.high-contrast button {
+  color: #ffd600 !important;
+  background: #212121 !important;
+  border-color: #ffd600 !important;
+}
+
+/* רספונסיביות – מסכים קטנים */
+@media (max-width: 800px) {
+  .main-header-box {
+    max-width: 100vw;
+  }
+}
+@media (max-width: 600px) {
+  .main-header-box {
+    padding-bottom: 7px;
+    max-width: 100vw;
+    border-radius: 0 0 2.2em 2.2em;
+  }
+  .main-header-logo {
+    flex-direction: column;
+    padding: 10px 0 0 0;
+    gap: 6px;
+    width: 100%;
+  }
+  .main-nav-bar {
+    flex-direction: column;
+    gap: 2px;
+    padding: 0;
+    width: 100vw;
+    box-sizing: border-box;
+  }
+  .container,
+  .currency-form,
+  .discount-form,
+  .interest-form,
+  .vat-form,
+  .result-card {
+    max-width: 99vw !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+  .main-header-logo .txt-main {
+    font-size: 1.35rem;
+  }
   .brand-title {
     font-size: 1.3rem;
   }
@@ -298,26 +505,24 @@ button,
     padding: 0.6rem 1rem;
   }
   #accessibility-btn {
-    left: 6px;
-    bottom: 9px;
+    left: 8px;
+    bottom: 12px;
     width: 44px;
     height: 44px;
   }
-  .payments-description {
-    direction: rtl;
-    text-align: right;
-  }
+}
+
+/* תיקון תגיות למובייל */
+@media (max-width: 500px) {
   .tag-cloud .badge {
-    font-size: 1em;
-    font-weight: 500;
-    border-radius: 1.5em;
-    background: #f3f6fc !important;
-    color: #2675d7 !important;
-    border: 1px solid #e4eaf4;
-    margin: 4px;
-    padding: 0.5em 1.1em;
-    box-shadow: 0 1px 3px #e0e8f633;
-    cursor: default;
-    user-select: none;
+    font-size: 0.95em;
+    padding: 0.4em 0.9em;
+  }
+}
+
+@media (max-width: 400px) {
+  .tag-cloud .badge {
+    font-size: 0.9em;
+    padding: 0.3em 0.8em;
   }
 }
